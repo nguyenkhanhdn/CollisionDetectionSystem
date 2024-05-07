@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CollisionDetectionSystem.Models.Location>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Nhật ký địa chỉ</h1>
+
+<p>
+    <a asp-action="Create">Thêm</a>
+</p>
+<table class="table display table-responsive table-bordered" id="locations" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GpsLocation)
+            </th>
+            <th>
+                Bản đồ
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    
+                @Html.DisplayFor(modelItem => item.GpsLocation)
+            </td>
+                <td><a href="https://maps.google.com/?q=@item.GpsLocation" target="_blank">Xem bản đồ</a></td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#locations').DataTable({ autoWidth: false })
+        });
+    </script>    
+}
